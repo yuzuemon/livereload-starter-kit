@@ -1,0 +1,9 @@
+# mv .gitignore
+
+.DS_Store
+
+Gruntfile.js
+README.md
+node_modules/
+package.json
+
