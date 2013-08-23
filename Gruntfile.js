@@ -1,46 +1,51 @@
-// from grunt-contrib-livereload github README
-var path = require('path');
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-
-var folderMount = function folderMount(connect, point) {
-  return connect.static(path.resolve(point));
-};
+// 'use strict';
 
 module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-
     pkg: '<json:package.json>',
 
     connect: {
-      livereload: {
+      server: { //ぶっちゃけここの名前何でもいい.
         options: {
-          // これは connect のポート
-          // livereload のポートはデフォルトだと 35729
-          port: 9001,
-          middleware: function(connect, options) {
-            return [lrSnippet, folderMount(connect, '.')];
-          }
+          hostname: '*',
+          port: 9001 // default 35729
         }
       }
     },
-    // Configuration to be run (and then tested)
-    regarde: {
-      // fred って名前がなんだかわからないけど、とりあえずそのままにしておいた
-      fred: {
-        // 監視対象
-        files: ['**/*.html','**/*.css', '**/*.js'],
-        tasks: ['livereload']
+
+    watch: {
+      livereload: {
+        files: ['**/*.html', '**/*.css'],
+        options: {
+          livereload: true,
+          spawn: false
+        }
+      },
+      uglify: {
+        files: ['public/js/*.js'],
+        tasks: ['uglify']
+      }
+    },
+
+    uglify: {
+      options: {
+        mangle: true
+      },
+      my_target: {
+        files: {
+          'index.min.js': ['public/js/index.js']
+        }
       }
     }
   });
 
   // load task
-  grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-livereload');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task
-  grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
+  grunt.registerTask('default', ['connect', 'watch']);
 };
