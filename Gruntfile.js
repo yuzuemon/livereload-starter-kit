@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     connect: {
       server: { //ぶっちゃけここの名前何でもいい.
         options: {
-          hostname: '*',
+          hostname: 'localhost',
           port: 9001 // default 35729
         }
       }
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       },
       my_target: {
         files: {
-          'index.min.js': ['public/js/index.js']
+          'public/js/index.min.js': ['public/js/index.js']
         }
       }
     }
