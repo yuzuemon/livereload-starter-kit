@@ -22,28 +22,12 @@ module.exports = function(grunt) {
           livereload: true,
           spawn: false
         }
-      },
-      uglify: {
-        files: ['public/js/*.js'],
-        tasks: ['uglify']
-      }
-    },
-
-    uglify: {
-      options: {
-        mangle: true
-      },
-      my_target: {
-        files: {
-          'public/js/index.min.js': ['public/js/index.js']
-        }
       }
     }
   });
 
   // load task
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task
