@@ -1,4 +1,10 @@
 livereload-starter-kit
 ======================
 
-node.jsでlivereloadする時用の設定ファイル群
+grant で livereload する時のスタートセット
+
+## How To Use
+
+* $ npm install
+* $ grant
+* livereload!!
